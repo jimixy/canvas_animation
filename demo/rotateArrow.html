@@ -22,13 +22,33 @@
 <body>
   <canvas id="canvas"></canvas>
   <script src="../assets/script/utils.js"></script>
+  <script src="../assets/components/Arrow.js"></script>
   <script>
     const canvas = document.getElementById('canvas');
     const ctx = canvas.getContext('2d');
 
     let W = canvas.width = 800;
     let H = canvas.height = 600;
+    let mouse = C.getOffSet(canvas);
 
+    const arrow = new Arrow({
+      x: W/2,
+      y: H/2,
+      w: 180,
+      h: 60
+    }).render(ctx);
+
+    // 跟随鼠标旋转
+    canvas.onmousemove = function () {
+      let dx = mouse.x - arrow.x;
+      let dy = mouse.y - arrow.y;
+      arrow.rotation = Math.atan2(dy,dx);
+
+      ctx.clearRect(0, 0 , W , H);
+      arrow.render(ctx);
+    }
+    console.log('arrow', arrow);
+    
   </script>
 </body>
 

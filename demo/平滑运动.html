@@ -22,13 +22,22 @@
 <body>
   <canvas id="canvas"></canvas>
   <script src="../assets/script/utils.js"></script>
+  <script src="../assets/components/Ball.js"></script>
   <script>
     const canvas = document.getElementById('canvas');
     const ctx = canvas.getContext('2d');
 
     let W = canvas.width = 800;
     let H = canvas.height = 600;
+    let mouse = C.getOffSet(canvas);
 
+    const ball = new Ball({
+      x: W / 2,
+      y: H / 2,
+      r: 50
+    }).render(ctx);
+
+    console.log('arrow', ball);
   </script>
 </body>
 
