@@ -34,25 +34,31 @@
     const ball = new Ball({
       x: W / 2,
       y: H / 2,
-      r: 50
+      r: 35
     }).render(ctx);
 
     let angle = 0;
-    const SWING = 160; // 振幅
+    let speed = 0.02;
+    let r = 150;
 
     (function move() {
       window.requestAnimationFrame(move);
-      
-      ctx.clearRect(0,0,W,H);
 
-      ball.x = W/2 + Math.sin(angle) * SWING;
+      ctx.clearRect(0, 0, W, H);
 
-      angle += 0.05;
+      ctx.beginPath();
+      ctx.arc(W/2,H/2, r ,0, Math.PI *2)
+      ctx.stroke();
+
+      ball.x = W/2 + r*Math.cos(angle);
+      ball.y = H/2 + r*Math.sin(angle);
+
+      angle += speed;
+      // 角度不能超过360度
       angle %= Math.PI * 2;
 
       ball.render(ctx);
     })()
-
   </script>
 </body>
 
